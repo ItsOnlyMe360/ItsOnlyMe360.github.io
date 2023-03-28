@@ -1,30 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>It's Only Me</title>
+	<title>ItsOnlyMe</title>
 	<style>
 		body {
-			background-color: #f5f5f5;
-			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #f7f7f7;
+			font-family: 'Open Sans', sans-serif;
+		}
+
+		header {
+			text-align: center;
+			background-color: #333;
+			color: #fff;
+			padding: 20px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 		}
 
 		h1 {
-			color: #333;
-			text-align: center;
+			margin: 0;
+			font-size: 36px;
+			font-weight: 600;
+			letter-spacing: 2px;
 		}
 
-		p {
-			font-size: 18px;
-			line-height: 1.5;
-			margin: 0 auto;
-			max-width: 600px;
+		.projects {
+			text-align: left;
 			padding: 20px;
-			text-align: justify;
+			background-color: #262626;
+			border-radius: 30px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			margin-top: 20px;
+			margin-left: 10px;
+			font-size: 24px;
+			font-weight: 600;
+		}
+
+		a {
+			color: #333;
+			text-decoration: none;
+			display: inline-block;
+			padding: 10px;
+			background-color: #fff;
+			border-radius: 30px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			transition: background-color 0.3s ease;
+			font-size: 18px;
+			font-weight: 600;
+			margin-top: 20px;
+			margin-left: 10px;
+		}
+
+		a:hover {
+			background-color: #333;
+			color: #fff;
 		}
 	</style>
 </head>
 <body>
-	<h1>It's Only Me</h1>
-	<p>Welcome to my page!</p>
+	<header>
+		<h1>ItsOnlyMe</h1>
+		<div class="projects">Projetos</div>
+	</header>
+	<div style="text-align: left; padding: 20px;">
+		<a href="https://itsonlyme360.github.io/WebPlayground/" target="_blank">Web Playground</a>
+		<a href="https://itsonlyme360.github.io/HorizonPack/" target="_blank">Horizon Resource Pack</a>
+	</div>
 </body>
 </html>
