@@ -1,22 +1,92 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="refresh" content="0; URL=http://104.243.43.102:25574/">
-	<title>redirect</title>
+	<title>Server dos Bobos</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
-	body {
-	  display: flex;
-	  flex-direction: column;
-	  justify-content: center;
-	  align-items: center;
-	  width: 100%;
-	  height: 100%;
-	}
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f2f2f2;
+		}
+		
+		.container {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-around;
+			margin-top: 50px;
+		}
 
+		.card {
+			background-color: #fff;
+			box-shadow: 0 2px 2px rgba(0,0,0,0.1);
+			border-radius: 5px;
+			width: 300px;
+			height: 300px;
+			margin-bottom: 30px;
+			padding: 20px;
+		}
+
+		.card h2 {
+			font-size: 24px;
+			margin-top: 0;
+		}
+
+		.card p {
+			font-size: 16px;
+			margin-top: 10px;
+			line-height: 1.5;
+		}
+
+		.button {
+			display: inline-block;
+			background-color: #4CAF50;
+			color: #fff;
+			padding: 10px 20px;
+			border-radius: 5px;
+			margin-top: 20px;
+			text-decoration: none;
+			transition: background-color 0.3s;
+		}
+
+		.button:hover {
+			background-color: #3e8e41;
+		}
+
+		@media (max-width: 600px) {
+			.container {
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.card {
+				width: 90%;
+			}
+		}
 	</style>
 </head>
 <body>
-	<p>Se você não for redirecionado automaticamente:</p>
-	<a href="http://104.243.43.102:25574/">clique aqui/</a>
+	<h1>Server dos Bobos</h1>
+	<div class="container">
+		<div class="card">
+			<h2>Mapa ao vivo</h2>
+			<p>Um mapa ao vivo que mostra os players e as construções atuais</p>
+			<a class="button" href="http://104.243.43.102:25574/#">Clique aqui</a>
+		</div>
+		<div class="card">
+			<h2>Adicionar o servidor</h2>
+			<p>Um link personalizado que automaticamente adiciona o servidor ao seu Minecraft</p>
+			<a class="button" href="https://tinyurl.com/5y8jxzce">Clique aqui</a>
+		</div>
+		<div class="card">
+			<h2>Mapa de geração do mundo</h2>
+			<p>Um mapa do mundo inteiro que mostra onde tem construções, locais, biomas e etc... (Version deve ser Java 1.19.4)</p>
+			<a class="button" href="https://www.chunkbase.com/apps/seed-map#3129161996563885040">Clique aqui</a>
+		</div>
+		<div class="card">
+			<h2>Textura personalizada</h2>
+			<p>Uma textura criada por mim pra adicionar umas coisinhas bonitinhas</p>
+			<a class="button" href="https://itsonlyme360.github.io/HorizonPack/">Clique aqui</a>
+		</div>
+	</div>
 </body>
 </html>
