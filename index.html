@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Portfólio</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <style>
+        
+        body {
+            font-family: "MS UI Gothic", Tahoma, sans-serif;
+            font-size: 16.8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-image: url('https://cdn.livepix.gg/profile/backgrounds/847d4d2c-edd1-4850-8c43-f589e3a8a5d6.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed; 
+        }
+        
+        .columns {
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            width: 100%; 
+        }
+        
+        .column {
+            flex: 1;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.25);
+            margin: 10px;
+            border-radius: 10px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+        }
+
+      
+        .social-button {
+            background-color: transparent;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+			transition: justify-content 0.3s, color 0.3s;
+            display: flex;
+			width: 250px;
+			justify-content: center;
+			text-align: center;
+        }
+
+        .twitch-button {
+            background-color: #6B449E;
+			text-align: center;
+        }
+
+        .instagram-button {
+            background-color: #E1306C;
+			text-align: center;
+        }
+
+        .youtube-button {
+            background-color: #FF0000;
+			text-align: center;
+        }
+
+        .twitter-button {
+            background-color: #1DA1F2;
+			text-align: center;
+        }
+		
+		.github-button {
+            background-color: #808080;
+			text-align: center;
+        }
+
+
+        .twitch-button:hover {
+            background-color: white;
+            color: #6B449E;
+			justify-content: left;
+        }
+
+        .instagram-button:hover {
+            background-color: white;
+            color: #E1306C;
+			justify-content: left;
+        }
+
+        .youtube-button:hover {
+            background-color: white;
+            color: #FF0000;
+			justify-content: left;
+        }
+
+        .twitter-button:hover {
+            background-color: white;
+            color: #1DA1F2;
+			justify-content: left;
+        }
+		
+		.github-button:hover {
+		background-color: white;
+		color: #808080;
+		justify-content: left;
+		}
+
+        /* Estilo dos ícones */
+        .social-icon {
+            margin-right: 5px;
+        }
+
+        .profile-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="columns">
+        <div class="column">
+
+            <h2>Itsonlyme</h2>
+            <img src="https://cdn.livepix.gg/profile/avatars/17988e20-a315-4e01-8a27-1a770bac17e8.png" alt="Foto de perfil" class="profile-image">
+            <p>Olá! Sou o Its :)</p>
+            <p>Eu faço muitas coisas, mas de principal:</p>
+            <p>Sou streamer e faço conteúdo para o Youtube</p>
+
+        </div>
+
+        <div class="column">
+
+            <h2>Redes Sociais</h2>
+
+            <a href="https://www.twitch.tv/itsonlyme360" class="social-button twitch-button" target="_blank">
+                <i class="fab fa-twitch social-icon"></i>Twitch
+            </a>
+            <a href="https://www.instagram.com/itsonlyme360/" class="social-button instagram-button" target="_blank">
+                <i class="fab fa-instagram social-icon"></i>Instagram
+            </a>
+            <a href="https://youtube.com/@itsonlyme360" class="social-button youtube-button" target="_blank">
+                <i class="fab fa-youtube social-icon"></i>Youtube
+            </a>
+            <a href="https://twitter.com/ItsOnlyMe360/" class="social-button twitter-button" target="_blank">
+                <i class="fab fa-twitter social-icon"></i>Twitter
+            </a>
+			<a href="https://itsonlyme360.github.io/old.html" class="social-button github-button" target="_blank">
+                <i class="fab fa-github"></i> Outros Projetos
+            </a>
+        </div>
+    </div>
+</body>
+</html>
