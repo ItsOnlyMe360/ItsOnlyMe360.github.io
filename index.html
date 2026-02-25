@@ -4,182 +4,349 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>itsonlyme</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+	
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/favicon/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
+	<link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+	
+	<link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+	
+	<link rel="shortcut icon" href="favicon/favicon.ico" />
+	
+	<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+
+	<link rel="manifest" href="favicon/site.webmanifest" />
 	
     <style>
-        
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: "MS UI Gothic", Tahoma, sans-serif;
-            font-size: 16.8px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            background-image: url('https://cdn.pixie.gg/profile/backgrounds/0de065de-d54c-4e33-a001-82a009b797bb.png');
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            background-image: url('https://c.feridinha.com/EmwW5.png');
+            background-position: center center;
             background-size: cover;
             background-repeat: no-repeat;
-            background-attachment: fixed; 
-        }
-        
-        .columns {
-            display: flex;
-            flex-direction: column; 
-            align-items: center;
-            width: 100%; 
-        }
-        
-        .column {
-            flex: 1;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.25);
-            margin: 10px;
-            border-radius: 10px;
-            color: white;
             display: flex;
             flex-direction: column;
-            align-items: center; 
+            justify-content: space-between;
+            color: white;
+            text-transform: lowercase;
         }
 
-      
-        .social-button {
-        background-color: transparent;
-        border: none;
-        padding: 10px 20px;
-        margin: 5px;
-        border-radius: 5px;
-        cursor: pointer;
-        color: white;
-        text-decoration: none;
-        transition: background-color 0.3s, color 0.3s;
-	transition: justify-content 0.3s, color 0.3s;
-        display: flex;
-	width: 250px;
-	justify-content: center;
-	text-align: center;
+        .glass-panel {
+            background: rgba(40, 40, 40, 0.4);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
-        .twitch-button {
-        background-color: #6B449E;
-	text-align: center;
+        .header-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding-top: 5vh;
         }
 
-        .instagram-button {
-        background-color: #E1306C;
-	text-align: center;
+        .profile-card {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 20px 30px;
+            border-radius: 20px;
+            gap: 20px;
+            max-width: 90%;
+            width: 450px;
         }
 
-        .youtube-button {
-        background-color: #FF0000;
-	text-align: center;
-        }
-
-        .twitter-button {
-        background-color: #1DA1F2;
-	text-align: center;
-        }
-
-	.bluesky-button {
-	background-color: #1083FE;
-	text-align:center;
-	}
-		
-	.github-button {
-        background-color: #808080;
-	text-align: center;
-        }
-
-
-        .twitch-button:hover {
-        background-color: white;
-        color: #6B449E;
-        }
-
-        .instagram-button:hover {
-        background-color: white;
-        color: #E1306C;
-        }
-
-        .youtube-button:hover {
-        background-color: white;
-        color: #FF0000;
-        }
-
-        .twitter-button:hover {
-        background-color: white;
-        color: #1DA1F2;
-        }
-
-	.bluesky-button:hover {
-	background-color: white;
-	color: #1083FE;
-	}
-		
-	.github-button:hover {
-	background-color: white;
-	color: #808080;
-	}
-
-        /* Estilo dos ícones */
-        .social-icon {
-            margin-right: 5px;
-        }
-
-        .profile-image {
-            width: 100px;
-            height: 100px;
+        .profile-pic {
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            margin-right: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .profile-text {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.4;
+        }
+
+        .dock {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding-bottom: 6vh;
+            gap: 20px;
+        }
+
+        .main-btn {
+            width: 65px;
+            height: 65px;
+            border-radius: 18px;
+            border: none;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .main-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+
+        .main-btn:active {
+            transform: scale(0.95);
+        }
+
+        .icon-slider {
+            display: flex;
+            flex-direction: column;
+            height: 1.4rem; 
+            overflow: hidden;
+            align-items: center;
+        }
+        
+        .slider-track {
+            display: flex;
+            flex-direction: column;
+            gap: 40px; 
+            animation: slide-icons 4s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+        }
+
+        .slider-track i {
+            height: 1.4rem; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes slide-icons {
+            0%, 20% { transform: translateY(0px); }
+            33%, 53% { transform: translateY(-63px); }
+            66%, 86% { transform: translateY(-125px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-content {
+            padding: 40px 25px 25px 25px;
+            border-radius: 20px;
+            position: relative;
+            width: 90%;
+            max-width: 380px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .popup-overlay.active .popup-content {
+            transform: scale(1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.2s;
+        }
+        .close-btn:hover { color: white; }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.07);
+            padding: 14px 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 0.2s, transform 0.1s;
+        }
+        
+        .link-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .link-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .link-btn i {
+            font-size: 1.3rem;
+            margin-right: 15px;
+            width: 25px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .link-btn span {
+            font-weight: 400;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
 <body>
-    <div class="columns">
-        <div class="column">
 
-            <h2>sobre mim</h2>
-            <img src="https://cdn.pixie.gg/profile/pictures/9ce7500a-9e0f-48db-bc7a-aa68fd18da54.png" alt="Foto de perfil" class="profile-image">
-            <p>Olá! Sou o Its :)</p>
-            <p>Eu faço muitas coisas, mas de principal:</p>
-            <p>faço umas lives na twitch e vídeos no youtube</p>
-
+    <div class="header-container">
+        <div class="profile-card glass-panel">
+            <img src="https://c.feridinha.com/hez2p.png" alt="enzo" class="profile-pic">
+            <div class="profile-text">
+                oi eu sou o enzo eu tenho <span id="age-display">xx</span> anos eu gosto de fazer umas coisas aleatorias
+            </div>
         </div>
+    </div>
 
-        <div class="column">
+    <footer class="dock">
+        <button class="main-btn glass-panel" onclick="openPopup('popup-social')">
+            <div class="icon-slider">
+                <div class="slider-track">
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-tiktok"></i>
+                    <i class="fa-brands fa-twitter"></i>
+                </div>
+            </div>
+        </button>
 
-            <h2>redes sociais</h2>
+        <button class="main-btn glass-panel" onclick="openPopup('popup-yt')">
+            <i class="fa-brands fa-youtube"></i>
+        </button>
 
-            <a href="https://www.twitch.tv/itsonlyme360" class="social-button twitch-button" target="_blank">
-                <i class="fab fa-twitch social-icon"></i>Twitch
+        <button class="main-btn glass-panel" onclick="openPopup('popup-music')">
+            <i class="fa-solid fa-music"></i>
+        </button>
+    </footer>
+
+    <div id="popup-yt" class="popup-overlay" onclick="closePopup(event, 'popup-yt')">
+        <div class="popup-content glass-panel">
+            <button class="close-btn" onclick="forceClose('popup-yt')"><i class="fa-solid fa-xmark"></i></button>
+            
+            <a href="https://www.youtube.com/@ItsOnlyMe360" target="_blank" class="link-btn">
+                <i class="fa-brands fa-youtube"></i>
+                <span>canal de mine</span>
             </a>
-            <a href="https://www.instagram.com/itsonlyme360/" class="social-button instagram-button" target="_blank">
-                <i class="fab fa-instagram social-icon"></i>Instagram
-            </a>
-            <a href="https://youtube.com/@itsonlyme360" class="social-button youtube-button" target="_blank">
-                <i class="fab fa-youtube social-icon"></i>Youtube Minecraft
-            </a>
-			<a href="https://www.youtube.com/@360itsonlyme" class="social-button youtube-button" target="_blank">
-                <i class="fab fa-youtube social-icon"></i>Youtube Reacts
+            
+            <a href="https://www.youtube.com/@360itsonlyme" target="_blank" class="link-btn">
+                <i class="fa-brands fa-youtube"></i>
+                <span>canal de react</span>
             </a>
         </div>
     </div>
+
+    <div id="popup-social" class="popup-overlay" onclick="closePopup(event, 'popup-social')">
+        <div class="popup-content glass-panel">
+            <button class="close-btn" onclick="forceClose('popup-social')"><i class="fa-solid fa-xmark"></i></button>
+
+            <a href="https://www.instagram.com/itsonlyme360/" target="_blank" class="link-btn">
+                <i class="fa-brands fa-instagram"></i>
+                <span>instagram</span>
+            </a>
+
+            <a href="https://www.tiktok.com/@itsonlyme.360" target="_blank" class="link-btn">
+                <i class="fa-brands fa-tiktok"></i>
+                <span>tiktok</span>
+            </a>
+
+            <a href="https://x.com/ItsOnlyMe360" target="_blank" class="link-btn">
+                <i class="fa-brands fa-twitter"></i>
+                <span>twitter</span>
+            </a>
+        </div>
+    </div>
+
+    <div id="popup-music" class="popup-overlay" onclick="closePopup(event, 'popup-music')">
+        <div class="popup-content glass-panel">
+            <button class="close-btn" onclick="forceClose('popup-music')"><i class="fa-solid fa-xmark"></i></button>
+
+            <a href="https://www.bandlab.com/itsonlyme360" target="_blank" class="link-btn">
+                <i class="fa-solid fa-music"></i>
+                <span>bandlab</span>
+            </a>
+
+            <a href="https://www.last.fm/pt/user/ItsOnlyMe360" target="_blank" class="link-btn">
+                <i class="fa-brands fa-lastfm"></i>
+                <span>last.fm</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function calculateAge() {
+            const birthDate = new Date('2005-06-17'); 
+            const today = new Date();
+            
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            if (age < 0) age = 0;
+            document.getElementById('age-display').innerText = age;
+        }
+        calculateAge();
+
+        function openPopup(id) {
+            document.getElementById(id).classList.add('active');
+        }
+
+        function closePopup(event, id) {
+            if (event.target.classList.contains('popup-overlay')) {
+                document.getElementById(id).classList.remove('active');
+            }
+        }
+
+        function forceClose(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+    </script>
 </body>
 </html>
