@@ -37,7 +37,6 @@
             background-repeat: no-repeat;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             color: white;
             text-transform: lowercase;
         }
@@ -84,11 +83,15 @@
         }
 
         .dock {
+            position: absolute;
+            bottom: 6vh;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
             justify-content: center;
-            align-items: flex-end;
-            padding-bottom: 6vh;
+            align-items: center;
             gap: 20px;
+            z-index: 10;
         }
 
         .main-btn {
