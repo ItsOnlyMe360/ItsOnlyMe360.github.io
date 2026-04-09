@@ -6,16 +6,11 @@
     <title>itsonlyme</title>
 	
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-	<link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
-	
-	<link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
-	
-	<link rel="shortcut icon" href="favicon/favicon.ico" />
-	
-	<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
-
-	<link rel="manifest" href="favicon/site.webmanifest" />
+    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
+    <link rel="shortcut icon" href="favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="favicon/site.webmanifest" />
 	
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
@@ -31,16 +26,47 @@
             height: 100vh;
             width: 100vw;
             overflow: hidden;
-            background-image: url('https://c.feridinha.com/EmwW5.png');
-            background-position: center center;
-            background-size: cover;
-            background-repeat: no-repeat;
+            background-color: #000;
             display: flex;
             flex-direction: column;
             color: white;
             text-transform: lowercase;
         }
 
+        /* --- PARALLAX SYSTEM --- */
+        .parallax-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .parallax-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform;
+        }
+
+        .layer-bg { background-image: url('https://c.feridinha.com/Td6sH.png'); background-size: cover; transform: scale(1.2); }
+        .layer-text { background-image: url('https://c.feridinha.com/DIiUd.png'); background-size: 400px; transform: scale(1.05); }
+        .layer-skin { background-image: url('https://c.feridinha.com/tcs4i.png'); background-size: 350px; background-position: 70% 50%; transform: scale(1.1); }
+
+        @media (max-width: 768px) {
+            .layer-text { background-size: 280px; }
+            .layer-skin { background-size: 250px; background-position: center 60%; }
+        }
+
+        /* --- UI ELEMENTS --- */
         .glass-panel {
             background: rgba(40, 40, 40, 0.4);
             backdrop-filter: blur(15px);
@@ -49,195 +75,83 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
-        .header-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            padding-top: 5vh;
-        }
+        .header-container { width: 100%; display: flex; justify-content: center; padding-top: 5vh; z-index: 10; position: relative; }
+        .profile-card { display: flex; flex-direction: row; align-items: center; padding: 20px 30px; border-radius: 20px; gap: 20px; max-width: 90%; width: 450px; }
+        .profile-pic { width: 70px; height: 70px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.2); object-fit: cover; }
+        .profile-text { font-size: 0.95rem; color: rgba(255, 255, 255, 0.9); line-height: 1.4; }
 
-        .profile-card {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            padding: 20px 30px;
-            border-radius: 20px;
-            gap: 20px;
-            max-width: 90%;
-            width: 450px;
-        }
+        .dock { position: absolute; bottom: 6vh; left: 50%; transform: translateX(-50%); display: flex; gap: 15px; z-index: 10; }
+        .main-btn { width: 60px; height: 60px; border-radius: 18px; border: none; color: white; font-size: 1.3rem; cursor: pointer; transition: all 0.3s; display: flex; justify-content: center; align-items: center; }
+        .main-btn:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.2); }
 
-        .profile-pic {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            object-fit: cover;
-            flex-shrink: 0;
-        }
-
-        .profile-text {
-            font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.4;
-        }
-
-        .dock {
-            position: absolute;
-            bottom: 6vh;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            z-index: 10;
-        }
-
-        .main-btn {
-            width: 65px;
-            height: 65px;
-            border-radius: 18px;
-            border: none;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.4rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .main-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-        }
-
-        .main-btn:active {
-            transform: scale(0.95);
-        }
-
-        .icon-slider {
-            display: flex;
-            flex-direction: column;
-            height: 1.4rem; 
-            overflow: hidden;
-            align-items: center;
-        }
-        
-        .slider-track {
-            display: flex;
-            flex-direction: column;
-            gap: 40px; 
-            animation: slide-icons 4s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
-        }
-
-        .slider-track i {
-            height: 1.4rem; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        @keyframes slide-icons {
-            0%, 20% { transform: translateY(0px); }
-            33%, 53% { transform: translateY(-63px); }
-            66%, 86% { transform: translateY(-125px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .popup-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .popup-content {
-            padding: 40px 25px 25px 25px;
-            border-radius: 20px;
-            position: relative;
-            width: 90%;
-            max-width: 380px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            transform: scale(0.9);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .popup-overlay.active .popup-content {
-            transform: scale(1);
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: none;
-            border: none;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 1.1rem;
-            cursor: pointer;
-            padding: 5px;
-            transition: color 0.2s;
-        }
-        .close-btn:hover { color: white; }
-
+        /* Botões de Link (Correção do Espaçamento) */
         .link-btn {
             display: flex;
             align-items: center;
             text-decoration: none;
             color: rgba(255, 255, 255, 0.9);
             background: rgba(255, 255, 255, 0.07);
-            padding: 14px 15px;
+            padding: 14px 18px;
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: background 0.2s, transform 0.1s;
+            transition: all 0.2s;
+            cursor: pointer;
+            gap: 15px; /* Espaçamento entre ícone e texto */
         }
-        
-        .link-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
+        .link-btn i { font-size: 1.3rem; width: 25px; text-align: center; }
+        .link-btn:hover { background: rgba(255, 255, 255, 0.15); }
+
+        /* Controles Inferior Direito */
+        .bottom-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
         }
 
-        .link-btn:active {
-            transform: scale(0.98);
+        .control-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(40, 40, 40, 0.5);
+            color: rgba(255, 255, 255, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
         }
-        
-        .link-btn i {
-            font-size: 1.3rem;
-            margin-right: 15px;
-            width: 25px;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.8);
-        }
+        .control-btn:hover, .control-btn.active { background: rgba(255, 255, 255, 0.2); color: white; }
+        .control-btn.off { opacity: 0.5; }
 
-        .link-btn span {
-            font-weight: 400;
-            letter-spacing: 0.5px;
-        }
+        /* Popups */
+        .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.2); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: 0.3s; }
+        .popup-overlay.active { opacity: 1; visibility: visible; }
+        .popup-content { padding: 40px 25px 25px; border-radius: 20px; width: 90%; max-width: 380px; display: flex; flex-direction: column; gap: 12px; transform: scale(0.9); transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .popup-overlay.active .popup-content { transform: scale(1); }
+        .close-btn { position: absolute; top: 10px; right: 15px; background: none; border: none; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 1.2rem; }
+
+        .copy-status-area { height: 20px; display: flex; justify-content: center; align-items: center; margin-top: -10px; }
+        #copy-status { font-size: 0.75rem; color: #4ade80; opacity: 0; transition: 0.3s; }
+        #copy-status.show { opacity: 1; }
+        .copy-hint { font-size: 0.7rem; text-align: center; opacity: 0.5; }
+
+        .icon-slider { height: 1.4rem; overflow: hidden; }
+        .slider-track { display: flex; flex-direction: column; gap: 40px; animation: slide-icons 4s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite; }
+        @keyframes slide-icons { 0%, 20% { transform: translateY(0px); } 33%, 53% { transform: translateY(-63px); } 66%, 86% { transform: translateY(-125px); } 100% { transform: translateY(0px); } }
     </style>
 </head>
 <body>
+
+    <div class="parallax-container">
+        <div class="parallax-layer layer-bg" data-speed="0.03"></div>
+        <div class="parallax-layer layer-text" data-speed="0.06"></div>
+        <div class="parallax-layer layer-skin" data-speed="0.1"></div>
+    </div>
 
     <div class="header-container">
         <div class="profile-card glass-panel">
@@ -250,105 +164,143 @@
 
     <footer class="dock">
         <button class="main-btn glass-panel" onclick="openPopup('popup-social')">
-            <div class="icon-slider">
-                <div class="slider-track">
-                    <i class="fa-brands fa-instagram"></i>
-                    <i class="fa-brands fa-tiktok"></i>
-                    <i class="fa-brands fa-twitter"></i>
-                </div>
-            </div>
+            <div class="icon-slider"><div class="slider-track"><i class="fa-brands fa-instagram"></i><i class="fa-brands fa-tiktok"></i><i class="fa-brands fa-twitter"></i></div></div>
         </button>
-
-        <button class="main-btn glass-panel" onclick="openPopup('popup-yt')">
-            <i class="fa-brands fa-youtube"></i>
-        </button>
-
-        <button class="main-btn glass-panel" onclick="openPopup('popup-music')">
-            <i class="fa-solid fa-music"></i>
-        </button>
+        <button class="main-btn glass-panel" onclick="openPopup('popup-yt')"><i class="fa-brands fa-youtube"></i></button>
+        <button class="main-btn glass-panel" onclick="openPopup('popup-music')"><i class="fa-solid fa-music"></i></button>
+        <button class="main-btn glass-panel" onclick="openPopup('popup-discord')"><i class="fa-brands fa-discord"></i></button>
     </footer>
 
+    <div class="bottom-controls">
+        <button class="control-btn active" id="parallax-toggle" onclick="toggleParallax()" title="ligar/desligar parallax">
+            <i class="fa-solid fa-mountain"></i>
+        </button>
+        <button class="control-btn" onclick="openPopup('popup-info')">
+            <i class="fa-solid fa-info"></i>
+        </button>
+    </div>
+
+    <!-- Popup Info -->
+    <div id="popup-info" class="popup-overlay" onclick="closePopup(event, 'popup-info')">
+        <div class="popup-content glass-panel">
+            <div style="font-size: 0.85rem; text-align: center; line-height: 1.5; margin-bottom: 10px;">
+                HTML, CSS e Javascript desse site foi gerado usando inteligencia artificial generativa. Eu uso mesmo não apoiando e entendo a hipocrisia da minha parte, mas minha falta de habilidade codando as linguas citadas me faz recorrer a isso, eu poderia aprender mas não quero, então eu sou 100% responsavel por isso. Eu não usei IA na arte de fundo e em nenhum texto, incluindo esse.
+            </div>
+            <button style="background: rgba(255,255,255,0.1); border: none; color: white; padding: 10px; border-radius: 10px; cursor: pointer; text-transform: lowercase;" onclick="forceClose('popup-info')">entendi</button>
+        </div>
+    </div>
+
+    <!-- Outros Popups -->
     <div id="popup-yt" class="popup-overlay" onclick="closePopup(event, 'popup-yt')">
         <div class="popup-content glass-panel">
             <button class="close-btn" onclick="forceClose('popup-yt')"><i class="fa-solid fa-xmark"></i></button>
-            
-            <a href="https://www.youtube.com/@ItsOnlyMe360" target="_blank" class="link-btn">
-                <i class="fa-brands fa-youtube"></i>
-                <span>canal de mine</span>
-            </a>
-            
-            <a href="https://www.youtube.com/@360itsonlyme" target="_blank" class="link-btn">
-                <i class="fa-brands fa-youtube"></i>
-                <span>canal de react</span>
-            </a>
+            <a href="https://www.youtube.com/@ItsOnlyMe360" target="_blank" class="link-btn"><i class="fa-brands fa-youtube"></i><span>canal de mine</span></a>
+            <a href="https://www.youtube.com/@360itsonlyme" target="_blank" class="link-btn"><i class="fa-brands fa-youtube"></i><span>canal de react</span></a>
         </div>
     </div>
 
     <div id="popup-social" class="popup-overlay" onclick="closePopup(event, 'popup-social')">
         <div class="popup-content glass-panel">
             <button class="close-btn" onclick="forceClose('popup-social')"><i class="fa-solid fa-xmark"></i></button>
-
-            <a href="https://www.instagram.com/itsonlyme360/" target="_blank" class="link-btn">
-                <i class="fa-brands fa-instagram"></i>
-                <span>instagram</span>
-            </a>
-
-            <a href="https://www.tiktok.com/@itsonlyme.360" target="_blank" class="link-btn">
-                <i class="fa-brands fa-tiktok"></i>
-                <span>tiktok</span>
-            </a>
-
-            <a href="https://x.com/ItsOnlyMe360" target="_blank" class="link-btn">
-                <i class="fa-brands fa-twitter"></i>
-                <span>twitter</span>
-            </a>
+            <a href="https://www.instagram.com/itsonlyme360/" target="_blank" class="link-btn"><i class="fa-brands fa-instagram"></i><span>instagram</span></a>
+            <a href="https://www.tiktok.com/@itsonlyme.360" target="_blank" class="link-btn"><i class="fa-brands fa-tiktok"></i><span>tiktok</span></a>
+            <a href="https://x.com/ItsOnlyMe360" target="_blank" class="link-btn"><i class="fa-brands fa-twitter"></i><span>twitter</span></a>
         </div>
     </div>
 
     <div id="popup-music" class="popup-overlay" onclick="closePopup(event, 'popup-music')">
         <div class="popup-content glass-panel">
             <button class="close-btn" onclick="forceClose('popup-music')"><i class="fa-solid fa-xmark"></i></button>
+            <a href="https://www.bandlab.com/itsonlyme360" target="_blank" class="link-btn"><i class="fa-solid fa-music"></i><span>bandlab</span></a>
+            <a href="https://www.last.fm/pt/user/ItsOnlyMe360" target="_blank" class="link-btn"><i class="fa-brands fa-lastfm"></i><span>last.fm</span></a>
+        </div>
+    </div>
 
-            <a href="https://www.bandlab.com/itsonlyme360" target="_blank" class="link-btn">
-                <i class="fa-solid fa-music"></i>
-                <span>bandlab</span>
-            </a>
-
-            <a href="https://www.last.fm/pt/user/ItsOnlyMe360" target="_blank" class="link-btn">
-                <i class="fa-brands fa-lastfm"></i>
-                <span>last.fm</span>
-            </a>
+    <div id="popup-discord" class="popup-overlay" onclick="closePopup(event, 'popup-discord')">
+        <div class="popup-content glass-panel">
+            <button class="close-btn" onclick="forceClose('popup-discord')"><i class="fa-solid fa-xmark"></i></button>
+            <div class="copy-status-area"><span id="copy-status">copiado!</span></div>
+            <div class="link-btn" id="discord-btn" onclick="copyDiscord()"><i class="fa-brands fa-discord"></i><span>itsonlyme360</span></div>
+            <span class="copy-hint">clique para copiar o user</span>
         </div>
     </div>
 
     <script>
+        let isParallaxEnabled = true;
+        const layers = document.querySelectorAll('.parallax-layer');
+
         function calculateAge() {
             const birthDate = new Date('2005-06-17'); 
             const today = new Date();
-            
             let age = today.getFullYear() - birthDate.getFullYear();
-            const monthDiff = today.getMonth() - birthDate.getMonth();
-            
-            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-                age--;
-            }
-            if (age < 0) age = 0;
+            if ((today.getMonth() - birthDate.getMonth()) < 0 || (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())) age--;
             document.getElementById('age-display').innerText = age;
         }
         calculateAge();
 
-        function openPopup(id) {
-            document.getElementById(id).classList.add('active');
-        }
-
-        function closePopup(event, id) {
-            if (event.target.classList.contains('popup-overlay')) {
-                document.getElementById(id).classList.remove('active');
+        function toggleParallax() {
+            isParallaxEnabled = !isParallaxEnabled;
+            const btn = document.getElementById('parallax-toggle');
+            btn.classList.toggle('active');
+            
+            if (!isParallaxEnabled) {
+                layers.forEach(layer => {
+                    const baseScale = layer.classList.contains('layer-bg') ? 1.2 : layer.classList.contains('layer-text') ? 1.05 : 1.1;
+                    layer.style.transform = `translate(0,0) scale(${baseScale})`;
+                });
+            }
+            
+            // Solicita permissão para giroscópio no iOS se for a primeira vez
+            if (isParallaxEnabled && typeof DeviceOrientationEvent.requestPermission === 'function') {
+                DeviceOrientationEvent.requestPermission();
             }
         }
 
+        // Parallax Mouse
+        document.addEventListener('mousemove', (e) => {
+            if (!isParallaxEnabled) return;
+            const x = (window.innerWidth / 2 - e.pageX);
+            const y = (window.innerHeight / 2 - e.pageY);
+            moveLayers(x, y);
+        });
+
+        // Parallax Mobile (Giroscópio)
+        window.addEventListener('deviceorientation', (e) => {
+            if (!isParallaxEnabled || !e.gamma) return;
+            // Gamma é inclinação lateral, Beta é frente/trás
+            const x = e.gamma * 10; 
+            const y = (e.beta - 45) * 10; 
+            moveLayers(x, y);
+        });
+
+        function moveLayers(x, y) {
+            layers.forEach(layer => {
+                const speed = layer.getAttribute('data-speed');
+                const xOffset = x * speed;
+                const yOffset = y * speed;
+                const baseScale = layer.classList.contains('layer-bg') ? 1.2 : layer.classList.contains('layer-text') ? 1.05 : 1.1;
+                layer.style.transform = `translate(${xOffset}px, ${yOffset}px) scale(${baseScale})`;
+            });
+        }
+
+        function openPopup(id) { document.getElementById(id).classList.add('active'); }
+        function closePopup(event, id) { if (event.target.classList.contains('popup-overlay')) forceClose(id); }
         function forceClose(id) {
             document.getElementById(id).classList.remove('active');
+            if(id === 'popup-discord') {
+                document.getElementById('copy-status').classList.remove('show');
+                document.getElementById('discord-btn').style.borderColor = '';
+            }
+        }
+
+        function copyDiscord() {
+            navigator.clipboard.writeText('itsonlyme360').then(() => {
+                const btn = document.getElementById('discord-btn');
+                const status = document.getElementById('copy-status');
+                btn.style.borderColor = '#4ade80';
+                status.classList.add('show');
+                setTimeout(() => { btn.style.borderColor = ''; status.classList.remove('show'); }, 1000);
+            });
         }
     </script>
 </body>
