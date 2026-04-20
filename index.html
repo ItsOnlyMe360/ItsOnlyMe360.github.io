@@ -81,10 +81,10 @@
         .profile-text { font-size: 0.95rem; color: rgba(255, 255, 255, 0.9); line-height: 1.4; }
 
         .dock { position: absolute; bottom: 6vh; left: 50%; transform: translateX(-50%); display: flex; gap: 15px; z-index: 10; }
-        .main-btn { width: 60px; height: 60px; border-radius: 18px; border: none; color: white; font-size: 1.3rem; cursor: pointer; transition: all 0.3s; display: flex; justify-content: center; align-items: center; }
+        .main-btn { width: 60px; height: 60px; border-radius: 18px; border: none; color: white; font-size: 1.3rem; cursor: pointer; transition: all 0.3s; display: flex; justify-content: center; align-items: center; overflow: hidden; }
         .main-btn:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.2); }
 
-        /* Botões de Link (Correção do Espaçamento) */
+        /* Botões de Link */
         .link-btn {
             display: flex;
             align-items: center;
@@ -96,7 +96,7 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.2s;
             cursor: pointer;
-            gap: 15px; /* Espaçamento entre ícone e texto */
+            gap: 15px;
         }
         .link-btn i { font-size: 1.3rem; width: 25px; text-align: center; }
         .link-btn:hover { background: rgba(255, 255, 255, 0.15); }
@@ -131,7 +131,7 @@
         /* Popups */
         .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.2); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: 0.3s; }
         .popup-overlay.active { opacity: 1; visibility: visible; }
-        .popup-content { padding: 40px 25px 25px; border-radius: 20px; width: 90%; max-width: 380px; display: flex; flex-direction: column; gap: 12px; transform: scale(0.9); transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .popup-content { padding: 40px 25px 25px; border-radius: 20px; width: 90%; max-width: 380px; display: flex; flex-direction: column; gap: 12px; transform: scale(0.9); transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative;}
         .popup-overlay.active .popup-content { transform: scale(1); }
         .close-btn { position: absolute; top: 10px; right: 15px; background: none; border: none; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 1.2rem; }
 
@@ -140,9 +140,33 @@
         #copy-status.show { opacity: 1; }
         .copy-hint { font-size: 0.7rem; text-align: center; opacity: 0.5; }
 
-        .icon-slider { height: 1.4rem; overflow: hidden; }
-        .slider-track { display: flex; flex-direction: column; gap: 40px; animation: slide-icons 4s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite; }
-        @keyframes slide-icons { 0%, 20% { transform: translateY(0px); } 33%, 53% { transform: translateY(-63px); } 66%, 86% { transform: translateY(-125px); } 100% { transform: translateY(0px); } }
+        /* CORREÇÃO DO CARROSSEL */
+        .icon-slider { 
+            height: 30px; /* Altura fixa de um ícone */
+            overflow: hidden; 
+            position: relative;
+        }
+        .slider-track { 
+            display: flex; 
+            flex-direction: column; 
+            animation: slide-icons-infinite 10s cubic-bezier(0.45, 0, 0.55, 1) infinite; 
+        }
+        .slider-track i {
+            height: 30px;
+            line-height: 30px; /* Garante que o ícone esteja no meio do container */
+            display: block;
+            text-align: center;
+        }
+
+        /* Animação para 4 ícones (Instagram, TikTok, Twitter, Medal) + 1 repetido */
+        /* Cada passo é 30px. Total de 4 ícones originais = 120px de deslocamento */
+        @keyframes slide-icons-infinite {
+            0%, 15% { transform: translateY(0); }
+            25%, 40% { transform: translateY(-30px); }
+            50%, 65% { transform: translateY(-60px); }
+            75%, 90% { transform: translateY(-90px); }
+            100% { transform: translateY(-120px); }
+        }
     </style>
 </head>
 <body>
@@ -164,7 +188,16 @@
 
     <footer class="dock">
         <button class="main-btn glass-panel" onclick="openPopup('popup-social')">
-            <div class="icon-slider"><div class="slider-track"><i class="fa-brands fa-instagram"></i><i class="fa-brands fa-tiktok"></i><i class="fa-brands fa-twitter"></i></div></div>
+            <div class="icon-slider">
+                <div class="slider-track">
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-tiktok"></i>
+                    <i class="fa-brands fa-twitter"></i>
+                    <i class="fa-solid fa-clapperboard"></i>
+                    <!-- Repetimos o primeiro para o loop infinito ser perfeito -->
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+            </div>
         </button>
         <button class="main-btn glass-panel" onclick="openPopup('popup-yt')"><i class="fa-brands fa-youtube"></i></button>
         <button class="main-btn glass-panel" onclick="openPopup('popup-music')"><i class="fa-solid fa-music"></i></button>
@@ -180,31 +213,22 @@
         </button>
     </div>
 
-    <!-- Popup Info -->
-    <div id="popup-info" class="popup-overlay" onclick="closePopup(event, 'popup-info')">
-        <div class="popup-content glass-panel">
-            <div style="font-size: 0.85rem; text-align: center; line-height: 1.5; margin-bottom: 10px;">
-                HTML, CSS e Javascript desse site foi gerado usando inteligencia artificial generativa. Eu uso mesmo não apoiando e entendo a hipocrisia da minha parte, mas minha falta de habilidade codando as linguas citadas me faz recorrer a isso, eu poderia aprender mas não quero, então eu sou 100% responsavel por isso. Eu não usei IA na arte de fundo e em nenhum texto, incluindo esse.
-            </div>
-            <button style="background: rgba(255,255,255,0.1); border: none; color: white; padding: 10px; border-radius: 10px; cursor: pointer; text-transform: lowercase;" onclick="forceClose('popup-info')">entendi</button>
-        </div>
-    </div>
-
-    <!-- Outros Popups -->
-    <div id="popup-yt" class="popup-overlay" onclick="closePopup(event, 'popup-yt')">
-        <div class="popup-content glass-panel">
-            <button class="close-btn" onclick="forceClose('popup-yt')"><i class="fa-solid fa-xmark"></i></button>
-            <a href="https://www.youtube.com/@ItsOnlyMe360" target="_blank" class="link-btn"><i class="fa-brands fa-youtube"></i><span>canal de mine</span></a>
-            <a href="https://www.youtube.com/@360itsonlyme" target="_blank" class="link-btn"><i class="fa-brands fa-youtube"></i><span>canal de react</span></a>
-        </div>
-    </div>
-
+    <!-- Popups -->
     <div id="popup-social" class="popup-overlay" onclick="closePopup(event, 'popup-social')">
         <div class="popup-content glass-panel">
             <button class="close-btn" onclick="forceClose('popup-social')"><i class="fa-solid fa-xmark"></i></button>
             <a href="https://www.instagram.com/itsonlyme360/" target="_blank" class="link-btn"><i class="fa-brands fa-instagram"></i><span>instagram</span></a>
             <a href="https://www.tiktok.com/@itsonlyme.360" target="_blank" class="link-btn"><i class="fa-brands fa-tiktok"></i><span>tiktok</span></a>
             <a href="https://x.com/ItsOnlyMe360" target="_blank" class="link-btn"><i class="fa-brands fa-twitter"></i><span>twitter</span></a>
+            <a href="https://medal.tv/pt/u/ItsOnlyMe?tab=home" target="_blank" class="link-btn"><i class="fa-solid fa-clapperboard"></i><span>medal</span></a>
+        </div>
+    </div>
+
+    <div id="popup-yt" class="popup-overlay" onclick="closePopup(event, 'popup-yt')">
+        <div class="popup-content glass-panel">
+            <button class="close-btn" onclick="forceClose('popup-yt')"><i class="fa-solid fa-xmark"></i></button>
+            <a href="https://www.youtube.com/@ItsOnlyMe360" target="_blank" class="link-btn"><i class="fa-brands fa-youtube"></i><span>canal de mine</span></a>
+            <a href="https://www.youtube.com/@360itsonlyme" target="_blank" class="link-btn"><i class="fa-brands fa-youtube"></i><span>canal de react</span></a>
         </div>
     </div>
 
@@ -222,6 +246,15 @@
             <div class="copy-status-area"><span id="copy-status">copiado!</span></div>
             <div class="link-btn" id="discord-btn" onclick="copyDiscord()"><i class="fa-brands fa-discord"></i><span>itsonlyme360</span></div>
             <span class="copy-hint">clique para copiar o user</span>
+        </div>
+    </div>
+
+    <div id="popup-info" class="popup-overlay" onclick="closePopup(event, 'popup-info')">
+        <div class="popup-content glass-panel">
+            <div style="font-size: 0.85rem; text-align: center; line-height: 1.5; margin-bottom: 10px;">
+                HTML, CSS e Javascript desse site foi gerado usando inteligencia artificial generativa. Eu uso mesmo não apoiando e entendo a hipocrisia da minha parte. Eu não usei IA na arte de fundo e em nenhum texto, incluindo esse.
+            </div>
+            <button style="background: rgba(255,255,255,0.1); border: none; color: white; padding: 10px; border-radius: 10px; cursor: pointer; text-transform: lowercase;" onclick="forceClose('popup-info')">entendi</button>
         </div>
     </div>
 
@@ -249,27 +282,12 @@
                     layer.style.transform = `translate(0,0) scale(${baseScale})`;
                 });
             }
-            
-            // Solicita permissão para giroscópio no iOS se for a primeira vez
-            if (isParallaxEnabled && typeof DeviceOrientationEvent.requestPermission === 'function') {
-                DeviceOrientationEvent.requestPermission();
-            }
         }
 
-        // Parallax Mouse
         document.addEventListener('mousemove', (e) => {
             if (!isParallaxEnabled) return;
             const x = (window.innerWidth / 2 - e.pageX);
             const y = (window.innerHeight / 2 - e.pageY);
-            moveLayers(x, y);
-        });
-
-        // Parallax Mobile (Giroscópio)
-        window.addEventListener('deviceorientation', (e) => {
-            if (!isParallaxEnabled || !e.gamma) return;
-            // Gamma é inclinação lateral, Beta é frente/trás
-            const x = e.gamma * 10; 
-            const y = (e.beta - 45) * 10; 
             moveLayers(x, y);
         });
 
