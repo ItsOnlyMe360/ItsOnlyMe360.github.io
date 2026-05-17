@@ -66,40 +66,86 @@
             .layer-skin { background-size: 250px; background-position: center 60%; }
         }
 
-        /* --- UI ELEMENTS --- */
+        /* =======================================================
+           LIQUID GLASS SYSTEM (CLASSE UNIVERSAL)
+           ======================================================= */
         .glass-panel {
-            background: rgba(40, 40, 40, 0.4);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            position: relative;
+            z-index: 1; /* Contexto de empilhamento */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); /* Sombra externa projetada */
+            border: none; /* A borda de vidro agora é feita no ::before */
+            background: transparent;
         }
 
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            /* inherit faz com que ele pegue o border-radius de quem estiver usando a classe (perfil, botão, barra lateral, etc) */
+            border-radius: inherit; 
+            /* Bezel brilhante para dar volume de vidro */
+            box-shadow: inset 1px 1px 0px -1px rgba(255, 255, 255, 0.4), inset 0 0 3px 1px rgba(255, 255, 255, 0.05);
+            /* Base escura e transparente */
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.3) 0%, rgba(10, 10, 10, 0.5) 100%);
+            transition: background 0.3s ease;
+        }
+
+        .glass-panel::after {
+            content: '';
+            position: absolute;
+            z-index: -2;
+            inset: 0;
+            border-radius: inherit;
+            /* Blur super suave combinado com a refração do SVG */
+            backdrop-filter: blur(3px); 
+            -webkit-backdrop-filter: blur(3px);
+            filter: url(#btn-glass); /* Aplica a distorção da bolha/lente */
+            -webkit-filter: url(#btn-glass);
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        /* Garante que os conteúdos dentro do painel fiquem por cima do vidro */
+        .glass-panel > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- UI ELEMENTS --- */
         .header-container { width: 100%; display: flex; justify-content: center; padding-top: 5vh; z-index: 10; position: relative; }
-        .profile-card { display: flex; flex-direction: row; align-items: center; padding: 20px 30px; border-radius: 20px; gap: 20px; max-width: 90%; width: 450px; }
+        
+        /* O border-radius definido aqui é automaticamente herdado pelo vidro */
+        .profile-card { display: flex; flex-direction: row; align-items: center; padding: 20px 30px; border-radius: 24px; gap: 20px; max-width: 90%; width: 450px; }
+        
         .profile-pic { width: 70px; height: 70px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.2); object-fit: cover; }
-        .profile-text { font-size: 0.95rem; color: rgba(255, 255, 255, 0.9); line-height: 1.4; }
+        .profile-text { font-size: 0.95rem; color: rgba(255, 255, 255, 0.9); line-height: 1.4; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
 
         .dock { position: absolute; bottom: 6vh; left: 50%; transform: translateX(-50%); display: flex; gap: 15px; z-index: 10; }
-        .main-btn { width: 60px; height: 60px; border-radius: 18px; border: none; color: white; font-size: 1.3rem; cursor: pointer; transition: all 0.3s; display: flex; justify-content: center; align-items: center; overflow: hidden; }
-        .main-btn:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.2); }
+        
+        .main-btn { width: 60px; height: 60px; border-radius: 18px; color: white; font-size: 1.3rem; cursor: pointer; transition: all 0.3s; display: flex; justify-content: center; align-items: center; }
+        
+        /* Efeito hover no vidro do botão */
+        .main-btn:hover::before { background: linear-gradient(135deg, rgba(40, 40, 40, 0.4) 0%, rgba(20, 20, 20, 0.6) 100%); }
+        .main-btn:hover { transform: translateY(-5px); }
 
-        /* Botões de Link */
+        /* Botões de Link (Internos aos popups) */
         .link-btn {
             display: flex;
             align-items: center;
             text-decoration: none;
             color: rgba(255, 255, 255, 0.9);
-            background: rgba(255, 255, 255, 0.07);
+            background: rgba(255, 255, 255, 0.05);
             padding: 14px 18px;
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.2s;
             cursor: pointer;
             gap: 15px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
         }
         .link-btn i { font-size: 1.3rem; width: 25px; text-align: center; }
-        .link-btn:hover { background: rgba(255, 255, 255, 0.15); }
+        .link-btn:hover { background: rgba(255, 255, 255, 0.15); transform: scale(1.02); }
 
         /* Controles Inferior Direito */
         .bottom-controls {
@@ -114,9 +160,7 @@
         .control-btn {
             width: 35px;
             height: 35px;
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(40, 40, 40, 0.5);
+            border-radius: 50%; /* O vidro líquido herda esse formato redondo perfeito! */
             color: rgba(255, 255, 255, 0.6);
             display: flex;
             justify-content: center;
@@ -125,24 +169,28 @@
             transition: all 0.3s;
             font-size: 0.9rem;
         }
-        .control-btn:hover, .control-btn.active { background: rgba(255, 255, 255, 0.2); color: white; }
+        .control-btn:hover, .control-btn.active { color: white; }
+        .control-btn:hover::before { background: rgba(255, 255, 255, 0.1); }
         .control-btn.off { opacity: 0.5; }
 
         /* Popups */
-        .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.2); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: 0.3s; }
+        .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: 0.3s; }
         .popup-overlay.active { opacity: 1; visibility: visible; }
-        .popup-content { padding: 40px 25px 25px; border-radius: 20px; width: 90%; max-width: 380px; display: flex; flex-direction: column; gap: 12px; transform: scale(0.9); transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative;}
+        
+        .popup-content { padding: 40px 25px 25px; border-radius: 24px; width: 90%; max-width: 380px; display: flex; flex-direction: column; gap: 12px; transform: scale(0.9); transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative;}
         .popup-overlay.active .popup-content { transform: scale(1); }
-        .close-btn { position: absolute; top: 10px; right: 15px; background: none; border: none; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 1.2rem; }
+        
+        .close-btn { position: absolute; top: 15px; right: 15px; background: none; border: none; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 1.2rem; transition: 0.2s;}
+        .close-btn:hover { color: white; transform: scale(1.1); }
 
         .copy-status-area { height: 20px; display: flex; justify-content: center; align-items: center; margin-top: -10px; }
-        #copy-status { font-size: 0.75rem; color: #4ade80; opacity: 0; transition: 0.3s; }
+        #copy-status { font-size: 0.75rem; color: #4ade80; opacity: 0; transition: 0.3s; text-shadow: 0 1px 2px rgba(0,0,0,0.8);}
         #copy-status.show { opacity: 1; }
         .copy-hint { font-size: 0.7rem; text-align: center; opacity: 0.5; }
 
         /* CORREÇÃO DO CARROSSEL */
         .icon-slider { 
-            height: 30px; /* Altura fixa de um ícone */
+            height: 30px; 
             overflow: hidden; 
             position: relative;
         }
@@ -153,13 +201,11 @@
         }
         .slider-track i {
             height: 30px;
-            line-height: 30px; /* Garante que o ícone esteja no meio do container */
+            line-height: 30px; 
             display: block;
             text-align: center;
         }
 
-        /* Animação para 4 ícones (Instagram, TikTok, Twitter, Medal) + 1 repetido */
-        /* Cada passo é 30px. Total de 4 ícones originais = 120px de deslocamento */
         @keyframes slide-icons-infinite {
             0%, 15% { transform: translateY(0); }
             25%, 40% { transform: translateY(-30px); }
@@ -170,6 +216,25 @@
     </style>
 </head>
 <body>
+
+    <!-- ==========================================
+         FILTROS SVG DE DESLOCAMENTO (LIQUID GLASS) 
+         ========================================== -->
+    <svg style="display: none">
+        <!-- Textura Wavy para grandes superfícies (se quiser usar depois) -->
+        <filter id="container-glass" x="0%" y="0%" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.008 0.008" numOctaves="2" seed="92" result="noise" />
+            <feGaussianBlur in="noise" stdDeviation="0.02" result="blur" />
+            <feDisplacementMap in="SourceGraphic" in2="blur" scale="77" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+        
+        <!-- Efeito Bolha/Lente aplicado na UI principal -->
+        <filter id="btn-glass" primitiveUnits="objectBoundingBox">
+            <feImage href="https://f.feridinha.com/CL6fC.png" preserveAspectRatio="none" x="0" y="0" width="1" height="1" result="map"></feImage>
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0.02" result="blur"></feGaussianBlur>
+            <feDisplacementMap id="disp" in="blur" in2="map" scale="1.5" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+    </svg>
 
     <div class="parallax-container">
         <div class="parallax-layer layer-bg" data-speed="0.03"></div>
@@ -194,7 +259,6 @@
                     <i class="fa-brands fa-tiktok"></i>
                     <i class="fa-brands fa-twitter"></i>
                     <i class="fa-solid fa-clapperboard"></i>
-                    <!-- Repetimos o primeiro para o loop infinito ser perfeito -->
                     <i class="fa-brands fa-instagram"></i>
                 </div>
             </div>
@@ -205,10 +269,11 @@
     </footer>
 
     <div class="bottom-controls">
-        <button class="control-btn active" id="parallax-toggle" onclick="toggleParallax()" title="ligar/desligar parallax">
+        <!-- Adicionada a classe glass-panel nos controles pequenos também -->
+        <button class="control-btn glass-panel active" id="parallax-toggle" onclick="toggleParallax()" title="ligar/desligar parallax">
             <i class="fa-solid fa-mountain"></i>
         </button>
-        <button class="control-btn" onclick="openPopup('popup-info')">
+        <button class="control-btn glass-panel" onclick="openPopup('popup-info')">
             <i class="fa-solid fa-info"></i>
         </button>
     </div>
@@ -254,7 +319,7 @@
             <div style="font-size: 0.85rem; text-align: center; line-height: 1.5; margin-bottom: 10px;">
                 HTML, CSS e Javascript desse site foi gerado usando inteligencia artificial generativa. Eu uso mesmo não apoiando e entendo a hipocrisia da minha parte. Eu não usei IA na arte de fundo e em nenhum texto, incluindo esse.
             </div>
-            <button style="background: rgba(255,255,255,0.1); border: none; color: white; padding: 10px; border-radius: 10px; cursor: pointer; text-transform: lowercase;" onclick="forceClose('popup-info')">entendi</button>
+            <button style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 10px; border-radius: 12px; cursor: pointer; text-transform: lowercase; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'" onclick="forceClose('popup-info')">entendi</button>
         </div>
     </div>
 
@@ -307,7 +372,7 @@
             document.getElementById(id).classList.remove('active');
             if(id === 'popup-discord') {
                 document.getElementById('copy-status').classList.remove('show');
-                document.getElementById('discord-btn').style.borderColor = '';
+                document.getElementById('discord-btn').style.borderColor = 'rgba(255, 255, 255, 0.05)';
             }
         }
 
@@ -317,7 +382,7 @@
                 const status = document.getElementById('copy-status');
                 btn.style.borderColor = '#4ade80';
                 status.classList.add('show');
-                setTimeout(() => { btn.style.borderColor = ''; status.classList.remove('show'); }, 1000);
+                setTimeout(() => { btn.style.borderColor = 'rgba(255, 255, 255, 0.05)'; status.classList.remove('show'); }, 1000);
             });
         }
     </script>
